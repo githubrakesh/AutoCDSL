@@ -119,7 +119,7 @@ def lambda_handler(event, context):
     from selenium.common.exceptions import StaleElementReferenceException
 
     driver.get(KITE_URL)
-
+    driver.implicitly_wait(20)
     #  filling the user id and password
     driver.find_element_by_id('userid').send_keys(KITE_USERNAME)
     driver.find_element_by_id('password').send_keys(KITE_PASSWORD)
@@ -179,6 +179,7 @@ def lambda_handler(event, context):
 
     print(f"Current time : {current_time}")
 
+    time.sleep(50)
     service = build('gmail', 'v1', credentials=creds)
 
     # Call the Gmail API and check for latest email from cdsl
@@ -242,6 +243,7 @@ def lambda_handler(event, context):
     driver.implicitly_wait(60)
     driver.find_element_by_id("VerifyOTP").click()
     driver.implicitly_wait(60)
+    time.sleep(10)
     print("Success")
     driver.quit()
 
